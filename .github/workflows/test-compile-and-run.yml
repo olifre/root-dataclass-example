@@ -26,12 +26,12 @@ jobs:
     - name: Write out file
       run: |
         source root/bin/thisroot.sh
-        export PATH=${GITHUB_WORKSPACE}/install/bin
-        export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/install/lib64
+        export PATH=${GITHUB_WORKSPACE}/install/bin:${PATH}
+        export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/install/lib64:${LD_LIBRARY_PATH}
         write_test
     - name: Test reading custom object from file with ROOT
       run: |
         source root/bin/thisroot.sh
-        export PATH=${GITHUB_WORKSPACE}/install/bin
-        export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/install/lib64
+        export PATH=${GITHUB_WORKSPACE}/install/bin:${PATH}
+        export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/install/lib64:${LD_LIBRARY_PATH}
         root -l test.root -e 'testparticle->Dump();' -q
