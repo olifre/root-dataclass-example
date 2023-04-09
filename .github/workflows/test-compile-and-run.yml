@@ -1,0 +1,37 @@
+name: CI and read test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Download ROOT
+      run: |
+        wget --no-verbose https://root.cern/download/root_v6.28.00.Linux-ubuntu22-x86_64-gcc11.3.tar.gz
+        tar xf root_v6.28.00.Linux-ubuntu22-x86_64-gcc11.3.tar.gz
+    - name: make
+      run: |
+        source root/bin/thisroot.sh
+        mkdir build
+        cd build
+        cmake .. -D CMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/ && make && make install
+    - name: Write out file
+      run: |
+        source root/bin/thisroot.sh
+        export PATH=${GITHUB_WORKSPACE}/install/bin
+        export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/install/lib64
+        write_test
+    - name: Test reading custom object from file with ROOT
+      run: |
+        source root/bin/thisroot.sh
+        export PATH=${GITHUB_WORKSPACE}/install/bin
+        export LD_LIBRARY_PATH=${GITHUB_WORKSPACE}/install/lib64
+        root -l test.root -e 'testparticle->Dump();' -q
