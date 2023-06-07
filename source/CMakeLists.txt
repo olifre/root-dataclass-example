@@ -17,7 +17,7 @@ SET(root_dict_libs
   ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}_rdict.pcm
   ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${library_name}.rootmap)
 
-file(GLOB sources ${PROJECT_SOURCE_DIR}/source/src/*.cxx)
+file(GLOB sources ${PROJECT_SOURCE_DIR}/source/src/*.cpp)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/source/inc/*.h)
 
 set(LIB_ROOT_DEPS ROOT::Core ROOT::Physics)
@@ -30,7 +30,7 @@ install(DIRECTORY inc/ DESTINATION include)
 install(TARGETS ${library_name} EXPORT TestTargets DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES ${root_dict_libs} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-add_executable(write_test src/write_test.cpp)
+add_executable(write_test app/write_test.cpp)
 set(EXEC_ROOT_DEPS ROOT::Core ROOT::Tree ROOT::Physics)
 target_link_libraries(write_test ${EXEC_ROOT_DEPS} ${library_name})
 install(TARGETS write_test)
