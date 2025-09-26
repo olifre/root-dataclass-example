@@ -16,7 +16,7 @@ jobs:
     - name: Install ROOT dependencies
       run: |
         sudo apt-get update
-        sudo apt-get -y install libtbb12
+        sudo apt-get -y install libtbb12 libvdt-dev
     - name: Download ROOT
       run: |
         TARBALL=root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz
