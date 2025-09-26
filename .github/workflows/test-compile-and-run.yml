@@ -15,8 +15,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Download ROOT
       run: |
-        wget --no-verbose https://root.cern/download/root_v6.28.00.Linux-ubuntu22-x86_64-gcc11.3.tar.gz
-        tar xf root_v6.28.00.Linux-ubuntu22-x86_64-gcc11.3.tar.gz
+        wget --no-verbose https://root.cern/download/root_v6.36.04.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz
+        tar xf root_*.tar.gz
     - name: make
       run: |
         source root/bin/thisroot.sh
